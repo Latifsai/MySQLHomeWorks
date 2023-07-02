@@ -1,0 +1,73 @@
+/*home work*/
+use factory;
+
+create table staff (
+id int, 
+first_name varchar(50),
+surename varchar(50),
+salary int
+); 
+
+
+insert into staff values 
+(1, 'Andrew', 'Tate', 1000000),
+(2, 'Arnold', 'Schwarzeneger', 2000000),
+(3, 'John', 'Weak', 30000),
+(4, 'Sem', 'Wolf', 8000),
+(5, 'Colm', 'Mcgregor', 90000),
+(6, 'Bjorn', 'Thorson', 150000);
+
+select * from staff;
+
+alter table staff
+add age int default 0;
+
+alter table staff
+change age staff_age int;
+
+update staff
+set staff_age = 33;
+
+-- while (select max(id) from staff) > 0
+-- 	begin 
+-- 		update staff	
+--         set staff_age = staff_age + 4;
+-- 	end;
+
+update staff
+set staff_age = 43
+where id = 2;
+
+update staff
+set staff_age = 50
+where id = 3;
+
+update staff
+set staff_age = 25
+where id = 4;
+
+update staff
+set staff_age = 19
+where id = 5;
+
+update staff
+set staff_age = 47
+where id = 6;
+
+select * from staff;
+
+create view v_staff_less_as_35 as 
+select * from staff where staff_age < 35;
+
+create view v_staff_more_as_35 as 
+select * from staff where staff_age > 35;
+
+select * from v_staff_less_as_35;
+select * from v_staff_more_as_35;
+
+create table tmp_person as 
+select first_name, surename, staff_age from staff;
+
+select * from tmp_person;
+
+drop table tmp_person;
